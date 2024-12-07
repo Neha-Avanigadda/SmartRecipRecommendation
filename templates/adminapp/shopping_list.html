@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Fallback color */
+            background-image: url('https://media.istockphoto.com/id/1134483707/photo/modern-kitchen-with-tabletop-and-space-for-display-your-products.jpg?s=612x612&w=0&k=20&c=Wn0jBSeizdcuVwR1BsQCjM1oIlByfwVPdn0QoiOTNz4=');
+
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 8px;
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #911d25;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #34495e;
+            margin: 10px 0;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+
+        .add-to-cart {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        #cart-items li {
+            background-color: #ecf0f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<br>
+<div class="container">
+    <h1 id="recipe-title">SHOPPING LIST</h1>
+</div>
+    <div class="product-list">
+        <!-- Products -->
+        <div class="product-card">
+            <img src="https://media.istockphoto.com/id/93041995/photo/tomato-w-clipping-path.jpg?s=612x612&w=0&k=20&c=YxS61cEClrQH_6z01jtYWZ54ENarwpTNSufGao_Wl1I=" alt="Tomato">
+            <h3 class="product-name">Tomato</h3>
+            <p class="product-price">$1.20 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Tomato', '$1.20 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://static.toiimg.com/thumb/msid-110970125,width-1280,height-720,imgsize-89492,resizemode-6,overlay-toi_sw,pt-32,y_pad-40/photo.jpg" alt="Potato">
+            <h3 class="product-name">Potato</h3>
+            <p class="product-price">$0.90 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Potato', '$0.90 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCzuwf8GqCvG4PlCTbE-DOt_ol_aqajqiWXg&s" alt="Onion">
+            <h3 class="product-name">Onion</h3>
+            <p class="product-price">$1.50 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Onion', '$1.50 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://plantura.garden/uk/wp-content/uploads/sites/2/2023/07/garlic-bulbs-cloves-1024x683.jpg?x63657" alt="Garlic">
+            <h3 class="product-name">Garlic</h3>
+            <p class="product-price">$2.00 / pack</p>
+            <button class="add-to-cart" onclick="addToCart('Garlic', '$2.00 / pack')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg" alt="Carrot">
+            <h3 class="product-name">Carrot</h3>
+            <p class="product-price">$1.30 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Carrot', '$1.30 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://www.greendna.in/cdn/shop/files/palak2_600x.jpg?v=1715600291" alt="Spinach">
+            <h3 class="product-name">Spinach</h3>
+            <p class="product-price">$1.00 / bunch</p>
+            <button class="add-to-cart" onclick="addToCart('Spinach', '$1.00 / bunch')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1MMNXpPhDreWGd7uo3aNGY4a2AuqtstN99A&s" alt="Eggplant">
+            <h3 class="product-name">Chilli</h3>
+            <p class="product-price">$1.80 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Chilli', '$1.80 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://4.imimg.com/data4/EV/MV/MY-2/green-cabbage-500x500.jpg" alt="Cabbage">
+            <h3 class="product-name">Cabbage</h3>
+            <p class="product-price">$1.20 / head</p>
+            <button class="add-to-cart" onclick="addToCart('Cabbage', '$1.20 / head')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR96yGYO50HSsNH9szmlKi7YOE56G_tHyvAow&s" alt="Chicken">
+            <h3 class="product-name">Chicken</h3>
+            <p class="product-price">$5.00 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Chicken', '$5.00 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR3yL8gyiY2EJPTwiRIjwoZcCAHxcZkvOvDw&s" alt="Fish">
+            <h3 class="product-name">Fish</h3>
+            <p class="product-price">$6.00 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Fish', '$6.00 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://www.heart.org/-/media/Images/News/2018/August-2018/0816Eggs_SC.jpg?h=501&w=800&sc_lang=en" alt="Eggs">
+            <h3 class="product-name">Eggs</h3>
+            <p class="product-price">$2.00 / dozen</p>
+            <button class="add-to-cart" onclick="addToCart('Eggs', '$2.00 / dozen')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://images-cdn.ubuy.co.in/65f7d04f33c74365b80b51f6-great-value-milk-2-reduced-fat-gallon.jpg" alt="Milk">
+            <h3 class="product-name">Milk</h3>
+            <p class="product-price">$1.50 / liter</p>
+            <button class="add-to-cart" onclick="addToCart('Milk', '$1.50 / liter')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQr3GxWoul2nv5DXMwO4H0EupLIB7SB9zmXQ&s" alt="Salt">
+            <h3 class="product-name">Salt</h3>
+            <p class="product-price">$0.50 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Salt', '$0.50 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://dmlxzvnzyohme.cloudfront.net/2015/03/_768xAUTO_crop_center-center_none_ns/turmeric-history640x360.jpg" alt="Turmeric">
+            <h3 class="product-name">Turmeric</h3>
+            <p class="product-price">$1.00 / 100g</p>
+            <button class="add-to-cart" onclick="addToCart('Turmeric', '$1.00 / 100g')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://media.istockphoto.com/id/177423914/photo/milled-black-pepper-isolated-on-white.jpg?s=612x612&w=0&k=20&c=xZcAIz0PRMo8JBJa_DQl56_bXe9DVwgAwDuhfgUY6Lo=" alt="Pepper">
+            <h3 class="product-name">Pepper</h3>
+            <p class="product-price">$2.50 / 100g</p>
+            <button class="add-to-cart" onclick="addToCart('Pepper', '$2.50 / 100g')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://mysunpure.in/cdn/shop/files/SPB_1L_Front_EqualSides_500x.png?v=1711009103" alt="Oil">
+            <h3 class="product-name">Oil</h3>
+            <p class="product-price">$3.00 / liter</p>
+            <button class="add-to-cart" onclick="addToCart('Oil', '$3.00 / liter')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://www.tasteofhome.com/wp-content/uploads/2019/11/sugar-shutterstock_615908132.jpg" alt="Sugar">
+            <h3 class="product-name">Sugar</h3>
+            <p class="product-price">$1.20 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Sugar', '$1.20 / kg')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0OSZNfpMOQvlK2WeZ_Xyb9L7r7NxGj-twNQ&s" alt="Curd">
+            <h3 class="product-name">Curd</h3>
+            <p class="product-price">$0.80 / 500g</p>
+            <button class="add-to-cart" onclick="addToCart('Curd', '$0.80 / 500g')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://iimtu.edu.in/blog/wp-content/uploads/2024/01/curry-leaves-1.gif" alt="Curry Leaves">
+            <h3 class="product-name">Curry Leaves</h3>
+            <p class="product-price">$0.30 / bunch</p>
+            <button class="add-to-cart" onclick="addToCart('Curry Leaves', '$0.30 / bunch')">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="https://standardcoldpressedoil.com/wp-content/uploads/2022/11/Buy-Thooyamalli-Boiled-Rice-ideal-for-flavorful-and-hearty-dishes-with-its-unique-taste-and-natural-aroma_11zon-scaled.jpg" alt="Rice">
+            <h3 class="product-name">Rice</h3>
+            <p class="product-price">$0.90 / kg</p>
+            <button class="add-to-cart" onclick="addToCart('Rice', '$0.90 / kg')">Add to Cart</button>
+        </div>
+
+        <!-- Add more products as needed -->
+    </div>
+<div class="container">
+
+    <h2>Your Cart</h2>
+    <ul id="cart-items">
+        <!-- Cart items will appear here -->
+    </ul>
+</div>
+    <script>
+        function addToCart(productName, productPrice) {
+            const cartItems = document.getElementById('cart-items');
+            const listItem = document.createElement('li');
+            listItem.textContent = `${productName} - ${productPrice}`;
+            cartItems.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>

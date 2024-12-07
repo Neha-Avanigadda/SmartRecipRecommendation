@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Fallback color */
+            background-image: url('https://media.istockphoto.com/id/1134483707/photo/modern-kitchen-with-tabletop-and-space-for-display-your-products.jpg?s=612x612&w=0&k=20&c=Wn0jBSeizdcuVwR1BsQCjM1oIlByfwVPdn0QoiOTNz4=');
+
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .history-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .history-item {
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .history-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .history-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .history-item h3 {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            .history-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Food History</h1>
+    <div class="history-container">
+        <div class="history-item">
+            <img src="https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg" alt="Biryani">
+            <h3>Biryani</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://sharethespice.com/wp-content/uploads/2024/02/Paneer-Tikka-Featured-500x500.jpg" alt="Paneer Tikka">
+            <h3>Paneer Tikka</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrPhZFMnmnCwPOJBM0jUUcr2qLF1q10-o3RQ&s" alt="Masala Dosa">
+            <h3>Masala Dosa</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://images.immediate.co.uk/production/volatile/sites/30/2021/02/butter-chicken-ac2ff98.jpg?quality=90&resize=440,400" alt="Butter Chicken">
+            <h3>Butter Chicken</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://static.toiimg.com/thumb/53314156.cms?imgsize=1762111&width=800&height=800" alt="Chole Bhature">
+            <h3>Chole Bhature</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://paattiskitchen.com/wp-content/uploads/2023/03/kmc_20230226_232129.jpg" alt="Samosa">
+            <h3>Samosa</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuEr26s3kM9juqXMS0PjJlpLJ3zYbP6ZI_1A&s" alt="Naan">
+            <h3>Naan</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReWr_7j9qgzwIy6voNtZCAwxbusLYqPmW1GQ&s" alt="Aloo Gobi">
+            <h3>Aloo Gobi</h3>
+        </div>
+        <div class="history-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTkzFRyU4bC2UNmte3glT_93zzuJly22BXjg&s" alt="Pav Bhaji">
+            <h3>Pav Bhaji</h3>
+        </div>
+    </div>
+</body>
+</html>

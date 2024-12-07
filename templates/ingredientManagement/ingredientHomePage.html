@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+{% extends 'Navbar/PHLPnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Management</title>
+        {% block styles %}
+
+    <style>
+
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f0f0f0; /* Fallback color */
+            background-image: url('https://img.lovepik.com/photo/20230422/medium/lovepik-lentil-dishes-food-background-lentil-soup-with-cooking-ingredients-on-dark-photo-image_352392162.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Main container styling */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Heading styling */
+        h1, h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+
+        /* Ingredient form styling */
+        .ingredient-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .ingredient-form input[type="text"] {
+            padding: 12px;
+            width: 60%;
+            border: 2px solid #2980b9;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .ingredient-form button {
+            padding: 12px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .ingredient-form button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Ingredient list styling */
+        .ingredient-list {
+            list-style: none;
+            margin-bottom: 40px;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .ingredient-list li {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        /* Recipe list styling */
+        .recipe-list {
+            list-style: none;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .recipe-list li {
+            background-color: #f39c12;
+            color: #fff;
+            margin: 5px 0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        /* Background image and decoration */
+
+
+        /* Styling for ingredient and recipe sections */
+        .section-image {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .section-image img {
+            width: 45%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            color: #16a085;
+            font-size: 28px;
+            margin: 20px 0;
+        }
+    </style>
+    {% endblock %}
+
+</head>
+<body>
+{% block body %}
+<br>
+    <div class="container">
+        <h1>My Ingredients</h1>
+
+        <!-- Section with image for aesthetic -->
+        <div class="section-image">
+            <!--<img src="f2.jpeg ?fit=crop&w=600&h=400" alt="Ingredients Image">
+             <img src="f3.jpeg ?fit=crop&w=600&h=400" alt="Cooking Image"> -->
+        </div>
+
+        <!-- Form to add new ingredient -->
+        <div class="ingredient-form">
+            <input type="text" id="ingredientInput" placeholder="Enter ingredient name" required>
+            <button onclick="addIngredient()">Add Ingredient</button>
+        </div>
+
+        <!-- Section Title -->
+        <h2 class="section-title">Your Ingredients</h2>
+
+        <!-- List of user ingredients -->
+        <ul class="ingredient-list" id="ingredientList">
+            <!-- Dynamic list of ingredients will be added here -->
+        </ul>
+
+        <!-- Section Title -->
+        <h2 class="section-title">Recipe Suggestions</h2>
+
+        <!-- Recipe suggestions based on ingredients -->
+        <ul class="recipe-list" id="recipeList">
+            <!-- Dynamic list of recipes will be added here -->
+        </ul>
+    </div>
+
+    <script>
+        // Initialize some sample recipes based on ingredients
+        const recipeSuggestions = {
+            'Chicken': ['Butter Chicken', 'Garlic Chicken'],
+    'Paneer': ['Paneer Tikka', 'Palak Paneer'],
+    'Potato': ['Samosa', 'Aloo Gobi'],
+    'Spinach': ['Palak Paneer', 'Spinach Salad'],
+    'Urad Dal': ['Medu Vada', 'Idli'],
+    'Tomato': ['Tomato Soup', 'Butter Chicken'],
+    'Semolina': ['Upma', 'Rava Kesari'],
+    'Onion': ['Onion Salad', 'Biriyani'],
+    'Garlic': ['Garlic Bread', 'Garlic Chicken']
+            // Add more recipes as needed
+        };
+
+        // Function to add ingredient to the list
+        function addIngredient() {
+            const ingredientInput = document.getElementById('ingredientInput');
+            const ingredientName = ingredientInput.value.trim();
+
+            if (ingredientName === '') {
+                alert('Please enter an ingredient!');
+                return;
+            }
+
+            // Add the ingredient to the list
+            const ingredientList = document.getElementById('ingredientList');
+            const newIngredient = document.createElement('li');
+            newIngredient.textContent = ingredientName;
+            ingredientList.appendChild(newIngredient);
+
+            // Suggest recipes based on the entered ingredient
+            suggestRecipes(ingredientName);
+
+            // Clear the input field
+            ingredientInput.value = '';
+        }
+
+        // Function to suggest recipes based on the ingredient
+        function suggestRecipes(ingredient) {
+            const recipeList = document.getElementById('recipeList');
+            const recipes = recipeSuggestions[ingredient] || ['No recipes found with the available ingredient.'];
+
+            // Clear the recipe list before adding new suggestions
+            recipeList.innerHTML = '';
+
+            // Add the suggested recipes to the list
+            recipes.forEach(recipe => {
+                const recipeItem = document.createElement('li');
+                recipeItem.textContent = recipe;
+                recipeList.appendChild(recipeItem);
+            });
+        }
+    </script>
+{% endblock %}
+
+</body>
+</html>

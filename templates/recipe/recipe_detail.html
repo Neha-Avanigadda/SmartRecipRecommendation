@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+{% extends 'Navbar/PHLPnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Instructions</title>
+            {% block styles %}
+
+    <style>
+         body {
+            background-color: #f0f0f0; /* Fallback color */
+            background-image: url('https://img.lovepik.com/photo/20230422/medium/lovepik-lentil-dishes-food-background-lentil-soup-with-cooking-ingredients-on-dark-photo-image_352392162.jpg');
+
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #2c3e50;
+        }
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            font-size: 1.2em;
+            color: #34495e;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 350px;
+            margin-right: 10px;
+            border: 2px solid #34495e;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        h2 {
+            color: #27ae60;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        p {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .ingredients, .instructions, .nutrition {
+            margin-left: 20px;
+            font-size: 1.1em;
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 5px solid #3498db;
+        }
+        .step {
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #dff9fb;
+            border-left: 5px solid #1abc9c;
+            border-radius: 5px;
+        }
+        .youtube-link {
+            margin-top: 20px;
+        }
+        .youtube-link a {
+            text-decoration: none;
+            color: white;
+            background-color: #e74c3c;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 1.2em;
+        }
+        .youtube-link a:hover {
+            background-color: #c0392b;
+        }
+        #recipe_result {
+            margin-top: 40px;
+        }
+        .nutrition {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+        {% endblock %}
+
+</head>
+<body>
+{% block body %}
+<br>
+<div class="container">
+    <h1>Find Recipe Instructions</h1>
+
+    <!-- Search form -->
+    <form method="GET" action="">
+        <label for="recipe_name">Enter Recipe Name:</label>
+        <input type="text" id="recipe_name" name="recipe_name" placeholder="Recipe Name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Recipe details - This will dynamically appear based on input -->
+    <div id="recipe_result"></div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const recipeName = document.getElementById('recipe_name').value.trim().toLowerCase();
+            const recipeResultDiv = document.getElementById('recipe_result');
+            let recipe = {};
+
+            // Dummy data for recipes (you can extend this with more recipes)
+            if (recipeName === 'chicken curry') {
+                recipe = {
+                    name: 'Chicken Curry',
+                    ingredients: `
+                        - 500g chicken<br>
+                        - 2 onions, finely chopped<br>
+                        - 2 tomatoes, pureed<br>
+                        - 2 tbsp ginger garlic paste<br>
+                        - 2 tbsp curry powder<br>
+                        - 1/2 tsp turmeric<br>
+                        - 1 cup coconut milk<br>
+                        - Fresh coriander for garnish
+                    `,
+                    instructions: `
+                        Heat oil in a pan and sauté onions until golden.<br>
+                        Add ginger garlic paste and cook for 2 minutes.<br>
+                        Stir in the tomatoes, curry powder, and turmeric.<br>
+                        Add chicken and cook for 10 minutes.<br>
+                        Pour in the coconut milk, cover, and simmer for 20 minutes.<br>
+                        Garnish with fresh coriander and serve hot.
+                    `,
+                    nutrition: `
+                        - Calories: 450 per serving<br>
+                        - Protein: 30g<br>
+                        - Carbohydrates: 15g<br>
+                        - Fat: 32g<br>
+                        - Fiber: 5g
+                    `,
+                    youtube_link: 'https://www.youtube.com/watch?v=chicken_curry_link'
+                };
+            } else if (recipeName === 'tomato recipe') {
+                recipe = {
+                    name: 'Tomato Recipe',
+                    ingredients: `
+                        - 4 ripe tomatoes<br>
+                        - 1 garlic clove, minced<br>
+                        - 2 tbsp olive oil<br>
+                        - Fresh basil<br>
+                        - Salt and pepper to taste
+                    `,
+                    instructions: `
+                        Heat olive oil in a pan, sauté garlic until fragrant.<br>
+                        Add chopped tomatoes and cook until soft.<br>
+                        Season with salt and pepper.<br>
+                        Garnish with fresh basil and serve with toasted bread.
+                    `,
+                    nutrition: `
+                        - Calories: 120 per serving<br>
+                        - Protein: 2g<br>
+                        - Carbohydrates: 6g<br>
+                        - Fat: 10g<br>
+                        - Fiber: 2g
+                    `,
+                    youtube_link: 'https://www.youtube.com/watch?v=tomato_recipe_link'
+                };
+            } else if (recipeName === 'biriyani') {
+                recipe = {
+                    name: 'Biriyani',
+                    ingredients: `
+                        - 2 cups basmati rice<br>
+                        - 500g chicken/mutton<br>
+                        - 2 onions, sliced<br>
+                        - 1 tbsp garam masala<br>
+                        - 2 tbsp yogurt<br>
+                        - 2 tsp biriyani masala<br>
+                        - Fresh coriander and mint leaves
+                    `,
+                    instructions: `
+                        Fry onions until golden brown and set aside.<br>
+                        Marinate meat with yogurt, garam masala, and spices for 30 minutes.<br>
+                        Cook the rice until 70% done, layer with marinated meat and fried onions.<br>
+                        Simmer on low heat for 20-25 minutes.<br>
+                        Garnish with coriander, mint, and serve hot.
+                    `,
+                    nutrition: `
+                        - Calories: 500 per serving<br>
+                        - Protein: 25g<br>
+                        - Carbohydrates: 65g<br>
+                        - Fat: 18g<br>
+                        - Fiber: 3g
+                    `,
+                    youtube_link: 'https://www.youtube.com/watch?v=biriyani_link'
+                };
+            } else if (recipeName === 'fish') {
+                recipe = {
+                    name: 'Fish Fry',
+                    ingredients: `
+                        - 4 fish fillets<br>
+                        - 2 tbsp olive oil<br>
+                        - 1 tsp turmeric<br>
+                        - 1 tsp red chili powder<br>
+                        - Salt to taste
+                    `,
+                    instructions: `
+                        Rub the fish with spices and salt.<br>
+                        Heat oil in a pan and fry the fish until golden and crispy.<br>
+                        Serve with lemon wedges.
+                    `,
+                    nutrition: `
+                        - Calories: 280 per serving<br>
+                        - Protein: 25g<br>
+                        - Carbohydrates: 2g<br>
+                        - Fat: 18g
+                    `,
+                    youtube_link: 'https://www.youtube.com/watch?v=fish_fry_link'
+                };
+            } else if (recipeName === 'mutton') {
+                recipe = {
+                    name: 'Mutton Curry',
+                    ingredients: `
+                        - 500g mutton<br>
+                        - 2 onions, finely chopped<br>
+                        - 2 tomatoes, pureed<br>
+                        - 2 tbsp ginger garlic paste<br>
+                        - 2 tbsp curry powder<br>
+                        - 1 cup coconut milk<br>
+                        - Fresh coriander for garnish
+                    `,
+                    instructions: `
+                        Sauté onions until golden brown.<br>
+                        Add ginger garlic paste, curry powder, and mutton.<br>
+                        Stir in coconut milk and simmer until the mutton is tender.<br>
+                        Garnish with coriander and serve hot.
+                    `,
+                    nutrition: `
+                        - Calories: 600 per serving<br>
+                        - Protein: 35g<br>
+                        - Carbohydrates: 10g<br>
+                        - Fat: 45g<br>
+                        - Fiber: 4g
+                    `,
+                    youtube_link: 'https://www.youtube.com/watch?v=mutton_curry_link'
+                };
+            } else if (recipeName === 'butter chicken') {
+    recipe = {
+        name: 'Butter Chicken',
+        ingredients: `
+            - 500g boneless chicken<br>
+            - 2 tbsp butter<br>
+            - 1 cup tomato puree<br>
+            - 1/2 cup cream<br>
+            - 1 tbsp ginger-garlic paste<br>
+            - 1 tsp garam masala<br>
+            - 1 tsp red chili powder<br>
+            - Salt to taste
+        `,
+        instructions: `
+            Marinate chicken with yogurt, spices, and ginger-garlic paste for 1 hour.<br>
+            Cook chicken until tender and set aside.<br>
+            In a pan, melt butter and add tomato puree, cook until thick.<br>
+            Add cream, garam masala, and the cooked chicken.<br>
+            Simmer for 10 minutes and serve hot with naan or rice.
+        `,
+        nutrition: `
+            - Calories: 450 per serving<br>
+            - Protein: 28g<br>
+            - Carbohydrates: 10g<br>
+            - Fat: 30g<br>
+            - Fiber: 2g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=butter_chicken_link'
+    };
+} else if (recipeName === 'paneer tikka') {
+    recipe = {
+        name: 'Paneer Tikka',
+        ingredients: `
+            - 250g paneer, cubed<br>
+            - 1 cup yogurt<br>
+            - 1 tsp turmeric<br>
+            - 1 tsp red chili powder<br>
+            - 1 tsp garam masala<br>
+            - 1 tbsp lemon juice<br>
+            - Bell peppers and onions, cubed
+        `,
+        instructions: `
+            Mix yogurt with spices and lemon juice.<br>
+            Marinate paneer and vegetables for 1 hour.<br>
+            Skewer paneer and vegetables, then grill or bake until golden.<br>
+            Serve hot with mint chutney.
+        `,
+        nutrition: `
+            - Calories: 300 per serving<br>
+            - Protein: 15g<br>
+            - Carbohydrates: 12g<br>
+            - Fat: 20g<br>
+            - Fiber: 3g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=paneer_tikka_link'
+    };
+} else if (recipeName === 'masala dosa') {
+    recipe = {
+        name: 'Masala Dosa',
+        ingredients: `
+            - 2 cups dosa batter<br>
+            - 2 boiled potatoes<br>
+            - 1 onion, chopped<br>
+            - 1 tsp mustard seeds<br>
+            - 1 tsp turmeric<br>
+            - Curry leaves<br>
+            - Salt to taste
+        `,
+        instructions: `
+            Heat oil and add mustard seeds, curry leaves, and onions.<br>
+            Add boiled potatoes, turmeric, and salt; mix well.<br>
+            Spread dosa batter thinly on a hot pan.<br>
+            Place potato mixture inside, fold, and serve with chutney and sambar.
+        `,
+        nutrition: `
+            - Calories: 350 per serving<br>
+            - Protein: 8g<br>
+            - Carbohydrates: 60g<br>
+            - Fat: 6g<br>
+            - Fiber: 4g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=masala_dosa_link'
+    };
+} else if (recipeName === 'palak paneer') {
+    recipe = {
+        name: 'Palak Paneer',
+        ingredients: `
+            - 200g paneer, cubed<br>
+            - 2 cups spinach<br>
+            - 1 onion, chopped<br>
+            - 1 tomato, chopped<br>
+            - 1 tsp cumin<br>
+            - 1/2 cup cream<br>
+            - Salt and spices to taste
+        `,
+        instructions: `
+            Blanch spinach, then blend into a puree.<br>
+            Sauté onion and tomato with spices, then add spinach puree.<br>
+            Add cream and paneer cubes; cook for 5 minutes.<br>
+            Serve hot with roti or rice.
+        `,
+        nutrition: `
+            - Calories: 320 per serving<br>
+            - Protein: 15g<br>
+            - Carbohydrates: 12g<br>
+            - Fat: 22g<br>
+            - Fiber: 3g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=palak_paneer_link'
+    };
+} else if (recipeName === 'samosa') {
+    recipe = {
+        name: 'Samosa',
+        ingredients: `
+            - 2 cups all-purpose flour<br>
+            - 3 boiled potatoes<br>
+            - 1 cup peas<br>
+            - 1 tsp cumin<br>
+            - 1 tsp garam masala<br>
+            - Salt to taste<br>
+            - Oil for frying
+        `,
+        instructions: `
+            Prepare dough using flour, water, and oil.<br>
+            Mash potatoes and mix with peas, cumin, and spices.<br>
+            Roll dough, fill with potato mixture, and shape into cones.<br>
+            Fry until golden brown and serve hot with chutney.
+        `,
+        nutrition: `
+            - Calories: 300 per serving<br>
+            - Protein: 6g<br>
+            - Carbohydrates: 35g<br>
+            - Fat: 15g<br>
+            - Fiber: 4g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=samosa_link'
+    };
+
+} else if (recipeName === 'idli') {
+    recipe = {
+        name: 'Idli',
+        ingredients: `
+            - 2 cups rice<br>
+            - 1 cup urad dal<br>
+            - 1 tsp fenugreek seeds<br>
+            - Salt to taste<br>
+            - Water for grinding
+        `,
+        instructions: `
+            Soak rice and urad dal with fenugreek seeds separately for 4-6 hours.<br>
+            Grind to a smooth batter and mix well with salt.<br>
+            Ferment overnight.<br>
+            Pour batter into idli molds and steam for 10-15 minutes.<br>
+            Serve hot with coconut chutney and sambar.
+        `,
+        nutrition: `
+            - Calories: 150 per serving<br>
+            - Protein: 4g<br>
+            - Carbohydrates: 28g<br>
+            - Fat: 1g<br>
+            - Fiber: 2g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=idli_link'
+    };
+} else if (recipeName === 'dosa') {
+    recipe = {
+        name: 'Dosa',
+        ingredients: `
+            - 2 cups dosa batter<br>
+            - 1 tsp oil for each dosa<br>
+            - Salt to taste<br>
+            - Optional: Potato masala for filling
+        `,
+        instructions: `
+            Heat a flat pan and spread a ladle of dosa batter thinly.<br>
+            Drizzle oil around the edges and cook until golden.<br>
+            Flip and cook briefly if needed.<br>
+            Serve hot with chutney and sambar, or fill with potato masala.
+        `,
+        nutrition: `
+            - Calories: 150 per dosa<br>
+            - Protein: 4g<br>
+            - Carbohydrates: 28g<br>
+            - Fat: 2g<br>
+            - Fiber: 2g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=dosa_link'
+    };
+} else if (recipeName === 'vada') {
+    recipe = {
+        name: 'Medu Vada',
+        ingredients: `
+            - 1 cup urad dal<br>
+            - 1 tsp cumin seeds<br>
+            - 2 green chilies, chopped<br>
+            - Curry leaves, chopped<br>
+            - Salt to taste<br>
+            - Oil for frying
+        `,
+        instructions: `
+            Soak urad dal for 4 hours and grind to a thick batter.<br>
+            Mix in cumin, chilies, curry leaves, and salt.<br>
+            Shape into donuts and fry in hot oil until golden brown.<br>
+            Serve hot with coconut chutney and sambar.
+        `,
+        nutrition: `
+            - Calories: 200 per vada<br>
+            - Protein: 5g<br>
+            - Carbohydrates: 15g<br>
+            - Fat: 12g<br>
+            - Fiber: 3g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=vada_link'
+    };
+} else if (recipeName === 'pongal') {
+    recipe = {
+        name: 'Ven Pongal',
+        ingredients: `
+            - 1 cup rice<br>
+            - 1/2 cup moong dal<br>
+            - 1 tsp black pepper<br>
+            - 1 tsp cumin seeds<br>
+            - Curry leaves<br>
+            - 2 tbsp ghee<br>
+            - Salt to taste
+        `,
+        instructions: `
+            Cook rice and moong dal together with water until soft.<br>
+            In ghee, fry cumin, pepper, and curry leaves.<br>
+            Mix the seasoning into the cooked rice-dal mixture.<br>
+            Serve hot with coconut chutney or sambar.
+        `,
+        nutrition: `
+            - Calories: 300 per serving<br>
+            - Protein: 8g<br>
+            - Carbohydrates: 40g<br>
+            - Fat: 10g<br>
+            - Fiber: 3g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=pongal_link'
+    };
+} else if (recipeName === 'upma') {
+    recipe = {
+        name: 'Upma',
+        ingredients: `
+            - 1 cup semolina (rava)<br>
+            - 2 cups water<br>
+            - 1 onion, chopped<br>
+            - 1 tsp mustard seeds<br>
+            - Curry leaves<br>
+            - 2 green chilies, chopped<br>
+            - Salt to taste
+        `,
+        instructions: `
+            Roast semolina until fragrant and set aside.<br>
+            Heat oil, add mustard seeds, curry leaves, and green chilies.<br>
+            Add onions and sauté until soft.<br>
+            Add water, salt, and bring to a boil.<br>
+            Slowly add semolina, stirring continuously to avoid lumps.<br>
+            Cook until thickened and serve hot.
+        `,
+        nutrition: `
+            - Calories: 250 per serving<br>
+            - Protein: 6g<br>
+            - Carbohydrates: 40g<br>
+            - Fat: 8g<br>
+            - Fiber: 2g
+        `,
+        youtube_link: 'https://www.youtube.com/watch?v=upma_link'
+    };
+
+            } else {
+                recipe = null;
+            }
+
+            // Output the result dynamically
+            if (recipe) {
+                recipeResultDiv.innerHTML = `
+                    <h2>${recipe.name}</h2>
+                    <h3>Ingredients:</h3>
+                    <div class="ingredients">${recipe.ingredients}</div>
+                    <h3>Instructions:</h3>
+                    <div class="instructions">${recipe.instructions}</div>
+                    <h3>Nutritional Information:</h3>
+                    <button onclick="toggleNutrition()">Show Nutritional Information</button>
+                    <div id="nutrition-info" class="nutrition">${recipe.nutrition}</div>
+                    <div class="youtube-link">
+                        <a href="${recipe.youtube_link}" target="_blank">Watch on YouTube</a>
+                    </div>
+                `;
+            } else {
+                recipeResultDiv.innerHTML = '<p>No recipe found. Please try another search.</p>';
+            }
+        });
+
+        function toggleNutrition() {
+            const nutritionDiv = document.getElementById('nutrition-info');
+            if (nutritionDiv.style.display === 'none') {
+                nutritionDiv.style.display = 'block';
+            } else {
+                nutritionDiv.style.display = 'none';
+            }
+        }
+    </script>
+</div>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <style>
+       body {
+            background-color: #f0f0f0; /* Fallback color */
+            background-image: url('https://www.shutterstock.com/image-photo/close-colorful-spices-fresh-vegetables-260nw-337999829.jpg');
+
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .favorites-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjusted grid */
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .favorite-item {
+            background: #fff;
+            color: #333;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .favorite-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Enhanced hover effect */
+        }
+
+        .favorite-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .favorite-item h3 {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            .favorites-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Favorite Recipes</h1>
+    <div class="favorites-container">
+        <div class="favorite-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCKqzrE2hZnTGh65h_SlXd8X8V75HXdXC3Eg&s" alt="Pizza">
+            <h3>Pizza</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGgTGDbJN2WtqTl5qpNc1DCUfjkirSNXc82g&s" alt="Ice Cream">
+            <h3>Ice Cream</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX-_PzrCRZPnEo-1hB4BMofk6LAvJN0hSGCQ&s" alt="Pasta">
+            <h3>Pasta</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThA3RBxM_uojEAH0HAPzMRZtv5Z0id4Bypiw&s" alt="Chocolate Cake">
+            <h3>Chocolate Cake</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://kitchenofdebjani.com/wp-content/uploads/2023/04/easy-indian-chicken-curry-Recipe-for-beginners-Debjanir-rannaghar.jpg" alt="Chicken">
+            <h3>Chicken</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2024/9/450200199/YQ/YC/AI/230584086/fish-curry-half.jpg" alt="Fish">
+            <h3>Fish</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://www.licious.in/blog/wp-content/uploads/2020/12/Hyderabadi-chicken-Biryani.jpg" alt="Biryani">
+            <h3>Biryani</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://sharethespice.com/wp-content/uploads/2024/02/Paneer-Tikka-Featured-500x500.jpg" alt="Paneer Tikka">
+            <h3>Paneer Tikka</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://paattiskitchen.com/wp-content/uploads/2023/03/kmc_20230226_232129.jpg" alt="Samosa">
+            <h3>Samosa</h3>
+        </div>
+        <div class="favorite-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ9IsSFjTwZMVgeE2c42LtxBrS_1grvx7LFA&s" alt="Dosa">
+            <h3>Dosa</h3>
+        </div>
+    </div>
+</body>
+</html>

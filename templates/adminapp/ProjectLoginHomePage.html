@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+{% extends 'Navbar/PHLPnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <br>
+<br>
+<br>
+    <title>SMART RECIPE RECOMMENDATION</title>
+
+    {% block styles %}
+    <style>
+        body {
+            background-color: #f0f0f0; /* Fallback color */
+            background-image: url('https://img.lovepik.com/photo/20230422/medium/lovepik-lentil-dishes-food-background-lentil-soup-with-cooking-ingredients-on-dark-photo-image_352392162.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        h1 {
+            color: white; /* Text color */
+            background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent background for better contrast */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: absolute; /* Positioning to center the text */
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the text */
+            opacity=0.5
+            font-size: 2.5em; /* Adjust font size */
+            z-index: 1; /* Ensure it's above other content */
+        }
+        /* Main container styling */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+                #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #16a085;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            z-index: 1000;
+        }
+        #chatbot-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+            flex-direction: column;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+    <div class="container">
+    <h1 id="recipe-title">SMART RECIPE RECOMMENDATION</h1>
+        <br>
+<br>
+<br>
+<br>
+        <br>
+        <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <a href="{% url 'ingredientHomePage' %}" >
+        <button type="button" class="btn btn-danger"
+        style="--bs-btn-padding-y: .90rem; --bs-btn-padding-x: .190rem; --bs-btn-font-size: .90rem;">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Recipe Suggestor
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        </button> </a>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <a href="{% url 'recipe_detail' %}" >
+         <button type="button" class="btn btn-danger"
+        style="--bs-btn-padding-y: .90rem; --bs-btn-padding-x: .190rem; --bs-btn-font-size: .90rem;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+             Recipe Instructions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+
+        </button> </a>
+
+        <br>
+        <br>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'shopping_list' %}" >
+         <button type="button" class="btn btn-danger"
+        style="--bs-btn-padding-y: .90rem; --bs-btn-padding-x: .190rem; --bs-btn-font-size: .90rem;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             Shopping List&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         </button> </a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+
+        <a href="{% url 'favorite_list' %}" >
+         <button type="button" class="btn btn-danger"
+        style="--bs-btn-padding-y: .90rem; --bs-btn-padding-x: .190rem; --bs-btn-font-size: .90rem;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             Favourites   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;
+         </button></a>
+        <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'history_list' %}" >
+         <button type="button" class="btn btn-danger"
+        style="--bs-btn-padding-y: .90rem; --bs-btn-padding-x: .190rem; --bs-btn-font-size: .90rem;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             History&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        </button> </a>
+
+
+    </div><div id="chatbot-container">💬</div>
+    <div id="chatbot-box">
+        <div id="chatbot-header" style="background: #16a085; color: white; padding: 10px; text-align: center;">Chatbot</div>
+        <div id="chatbot-body" style="padding: 10px; overflow-y: auto; flex-grow: 1;"></div>
+        <div id="chatbot-footer" style="padding: 10px; display: flex;">
+            <input type="text" id="chatbot-input" style="flex: 1; margin-right: 10px;" placeholder="Type your message">
+            <button id="chatbot-send" style="background: #16a085; color: white; padding: 5px;">Send</button>
+        </div>
+    </div>
+    <script>
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotBox = document.getElementById('chatbot-box');
+        const chatbotBody = document.getElementById('chatbot-body');
+        const chatbotInput = document.getElementById('chatbot-input');
+
+        chatbotContainer.addEventListener('click', () => {
+            chatbotBox.style.display = chatbotBox.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        document.getElementById('chatbot-send').addEventListener('click', () => {
+            const userMessage = chatbotInput.value.trim();
+            if (!userMessage) return alert('Please type a message.');
+
+            // Display user's message
+            const userMsgElem = document.createElement('div');
+            userMsgElem.textContent = "You: " + userMessage;
+            chatbotBody.appendChild(userMsgElem);
+
+            chatbotInput.value = ''; // Clear input
+
+            // Send user's message to the backend
+            fetch('/chatbot-response/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botMsgElem = document.createElement('div');
+                botMsgElem.textContent = "Bot: " + data.response;
+                botMsgElem.style.color = 'blue';
+                chatbotBody.appendChild(botMsgElem);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight; // Scroll to bottom
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const errorMsgElem = document.createElement('div');
+                errorMsgElem.textContent = "Bot: Sorry, an error occurred.";
+                errorMsgElem.style.color = 'red';
+                chatbotBody.appendChild(errorMsgElem);
+            });
+        });
+        </script>
+{% endblock %}
+
+</body>
+</html>
